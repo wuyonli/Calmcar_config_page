@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!--告诉浏览器，使用最新的html5的内核来解析当前网页-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="jquery-3.3.1.js"></script>
+    <script src="bootstrap.min.js"></script>
+    <title>算法参数配置</title>
+</head>
+
+<body>
+    <!-- <form id="configForm"> -->
+    <dev class="jumbotron">
+        <table>
+            <tr>
+                <td colspan="2"><img src="calmcar.jpg" style="width: 730px;height: 160px"></td>
+            </tr>
+            <tr>
+                <td>
+                    <b class="font_shadow">
+                        <font color="white" size="6" face="楷体">相机x</font>
+                    </b class="font_shadow">
+                    <input name="camera_x" type="text" id="camera_x" placeholder="相机x坐标(cm)">
+
+                </td>
+                <td>
+                    <b class="font_shadow">
+                        <font color="white" size="6" face="楷体">FcwTime</font>
+                    </b>
+                    <input name="nFcwTime" type="text" id="nFcwTime" placeholder="前车碰撞报警阈值(ms)">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b class="font_shadow">
+                        <font color="white" size="6" face="楷体">相机y</font>
+                    </b>
+                    <input name="camera_y" type="text" id="camera_y" placeholder="相机y坐标(cm)">
+
+                </td>
+                <td>
+                    <b class="font_shadow">
+                        <font color="white" size="6" face="楷体">ThwTime</font>
+                    </b>
+                    <input name="nThwTime" type="text" id="nThwTime" placeholder="车距过近报警阈值(ms)">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b class="font_shadow">
+                        <font color="white" size="6" face="楷体">相机z</font>
+                    </b>
+                    <input name="camera_z" type="text" id="camera_z" placeholder="相机z坐标(cm)">
+
+                </td>
+                <td>
+                    <b class="font_shadow">
+                        <font color="white" size="6" face="楷体">PcwTime</font>
+                    </b>
+                    <input name="nPcwTime" type="text" id="nPcwTime" placeholder="行人碰撞报警阈值(ms)">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b class="font_shadow">
+                        <font color="white" size="6" face="楷体">车宽</font>
+                    </b>
+                    <input name="vehicle_width" type="text" id="vehicle_width" placeholder="车辆宽度(cm)">
+
+                </td>
+                <td>
+                    <b class="font_shadow">
+                        <font color="white" size="6" face="楷体">灵敏度</font>
+                    </b>
+                    <input name="nLdwThreshold" type="text" id="nLdwThreshold" placeholder="车道偏离报警灵敏度">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <button type="button" id="submit" class="btn btn-success btn-lg"
+                        style="text-shadow: black 5px 3px 3px;">提交</button>
+                </td>
+            </tr>
+        </table>
+    </dev>
+    <!-- </form> -->
+    <style type="text/css">
+        @import url("bootstrap.min.css");
+
+        table {
+            margin: auto;
+            width: 740px;
+            height: 900px;
+            border-color: gray;
+            border-style: solid;
+            border-width: 1px;
+            background-image: url("bg2.jpg");
+            background-size: 740px 900px;
+        }
+
+        td {
+            align-content: center;
+            text-align: center;
+        }
+
+        input[id="submit"] {
+            width: 80px;
+            height: 40px;
+            /* background-image: url("img/lightOpen.jpg"); */
+            /* background-size: 200px 140px; */
+        }
+
+        input[type="text"] {
+            width: 240px;
+            height: 60px;
+            border-radius: 6px;
+        }
+
+        .btn-lg {
+            padding: 12px 26px;
+            font-size: 28px;
+            line-height: 1.33;
+            border-radius: 15px;
+        }
+
+        .font_shadow {
+            text-shadow: black 5px 3px 3px;
+        }
+    </style>
+
+    <script type="text/javascript">
+        // 页面加载成功后获取标定和报警参数
+        $(document).ready(function(){
+            // alert("document load success...");
+            // 获取标定参数
+            $get({
+                url: "http://192.168.1.1:5580/api/adas/CalibrationParam",
+                success: function (calibration_result) {
+                    var calibration_json = JSON.parse(calibration_result);
+                    $("#camera_x").val(calibration_json.temperature);
+                    $("#camera_y").val(calibration_json.humidity);
+                    $("#camera_z").val(calibration_json.camera_z);
+                    $("#vehicle_width").val(calibration_json.vehicle_width);
+                }
+            })
+
+            // 获取报警参数
+            $get({
+                url: "http://192.168.1.1:5580/api/adas/WarnConfigParam",
+                success: function (alarm_result) {
+                    var alarm_json = JSON.parse(alarm_result);
+                    $("#nFcwTime").val(alarm_json.nFcwTime);
+                    $("#nThwTime").val(alarm_json.nThwTime);
+                    $("#nPcwTime").val(alarm_json.nPcwTime);
+                    $("#nLdwThreshold").val(alarm_json.nLdwThreshold);
+                }
+            })
+
+        })
+
+        $("#submit").click(function () {
+            //1. 序列化表单项，得到表单提交所有的值，其中包含了action=login
+            // var param = $("#configForm").serializeArray();
+            alert("call back success"); //弹出提示按钮回调成功
+
+            // 设置标定参数
+            var calibration_Param = {
+                camera_x: parseInt($("#camera_x").val()), camera_y: parseInt($("#camera_y").val()), camera_z: parseInt($("#camera_z").val()),
+                vehicle_width: parseInt($("#vehicle_width").val())
+            };
+            $.post({
+                url: "http://192.168.1.1:5580/api/adas/CalibrationParam",
+                contentType: "application/json",
+                dataType: "json",
+                data: JSON.stringify(calibration_Param),
+                success: function (result) {
+                    alert("set calibration Param success"); //弹出一个框显示服务器返回的内容
+                }
+            });
+
+            //设置报警参数
+            var alarm_Param = {
+                nFcwTime: parseInt($("#nFcwTime").val()), nThwTime: parseInt($("#nThwTime").val()), nPcwTime: parseInt($("#nPcwTime").val()),
+                nLdwThreshold: parseInt($("#nLdwThreshold").val())
+            };
+            $.post({
+                url: "http://192.168.1.1:5580/api/adas/WarnConfigParam",
+                contentType: "application/json",
+                dataType: "json",
+                data: JSON.stringify(alarm_Param),
+                success: function (result) {
+                    alert("set alarm Param success"); //弹出一个框显示服务器返回的内容
+                }
+            });
+
+        })
+
+    </script>
+</body>
+
+</html>

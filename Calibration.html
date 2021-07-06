@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>calibration param cfg</title>
+
+    <link rel="stylesheet" type="text/css" href="./bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="./font-awesome.css" />
+    <script src="./jquery-3.3.1.min.js"></script>
+    <script src="./bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="modal fade bd-example-modal-sm" id="myModal" role="dialog" data-backdrop="false" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <p class="text-center mb-0">
+                    <i class="fa mr-1" aria-hidden="true" id="errorInfo">提交失败</i>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <dev>
+        <table>
+            <tr>
+                <td>
+                    <b class="font_shadow">
+                        <font color="white" size="6" face="楷体">相机x</font>
+                    </b class="font_shadow">
+                </td>
+                <td>
+                    <input name="camera_x" type="text" id="camera_x" title="相机x坐标(mm)" placeholder="相机x坐标(mm)">
+                </td>
+                <td>
+                    <b class="font_shadow">
+                        <font color="white" size="6" face="楷体">相机y</font>
+                    </b>
+                </td>
+                <td>
+                    <input name="camera_y" type="text" id="camera_y" title="相机y坐标(mm)" placeholder="相机y坐标(mm)">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b class="font_shadow">
+                        <font color="white" size="6" face="楷体">相机z</font>
+                    </b>
+                </td>
+                <td>
+                    <input name="camera_z" type="text" id="camera_z" title="相机z坐标(mm)" placeholder="相机z坐标(mm)">
+
+                </td>
+                <td>
+                    <b class="font_shadow">
+                        <font color="white" size="6" face="楷体">车宽</font>
+                    </b>
+                </td>
+                <td>
+
+                    <input name="vehicle_width" type="text" id="vehicle_width" title="车辆宽度(mm)" placeholder="车辆宽度(mm)">
+
+                </td>
+
+            </tr>
+            <tr>
+                <td>
+                    <b class="font_shadow">
+                        <font color="white" size="6" face="楷体">cro_x</font>
+                    </b>
+                </td>
+                <td>
+                   
+                    <input name="crossing_x" type="text" id="crossing_x" title="消失点x坐标" placeholder="消失点x坐标">
+                </td>
+                <td>
+                    <b class="font_shadow">
+                        <font color="white" size="6" face="楷体">cro_y</font>
+                    </b>
+                </td>
+                <td>
+                    
+                    <input name="crossing_y" type="text" id="crossing_y" title="消失点y坐标" placeholder="消失点y坐标">
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <b class="font_shadow">
+                        <font color="white" size="6" face="楷体">foc_l</font>
+                    </b>
+                </td>
+                <td>
+                   
+                    <input name="focus_length" type="text" id="focus_length" title="相机焦距" placeholder="相机焦距">
+                </td>
+                <td>
+                    <b class="font_shadow">
+                        <font color="white" size="6" face="楷体">pix_l</font>
+                    </b>
+                </td>
+                <td>
+                    <input name="pixel_length" type="text" id="pixel_length" title="相机像素长度" placeholder="相机像素长度">
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <b class="font_shadow">
+                        <font color="white" size="6" face="楷体">fps</font>
+                    </b>
+                </td>
+                <td>
+                    <input name="fps" type="text" id="fps" title="帧率" placeholder="帧率">
+                </td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <button type="button" id="submit" class="btn btn-success btn-lg"
+                        style="text-shadow: black 5px 3px 3px;">提交</button>
+                </td>
+            </tr>
+        </table>
+    </dev>
+    <!-- </form> -->
+    <style type="text/css">
+        body {
+            background-color: #292528;
+        }
+
+        table {
+            margin: auto;
+            width: 950px;
+            height: 480px;
+            border-color: gray;
+            border-style: solid;
+            border-width: 0px;
+            /* background-image: url("bg2.jpg"); */
+            background-color: #292528;
+            background-size: 950px 480px;
+
+        }
+
+        td {
+            align-content: center;
+            text-align: center;
+        }
+
+        input[id="submit"] {
+            width: 80px;
+            height: 40px;
+        }
+
+        input[type="text"] {
+            width: 240px;
+            height: 60px;
+            border-radius: 6px;
+        }
+
+        .btn-lg {
+            padding: 12px 26px;
+            font-size: 28px;
+            line-height: 1.33;
+            border-radius: 15px;
+        }
+
+        .font_shadow {
+            text-shadow: black 5px 3px 3px;
+        }
+
+        .modal-content {
+            /* 宽度自适应内容 */
+            width: fit-content;
+            /* 流出间隙 */
+            padding: 0.2rem 0.4rem;
+        }
+    </style>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            console.log(window.location.host);
+            // 获取标定参数
+            $.get({
+                url: location.protocol + "//" + location.host + "/api/adas/CalibrationParam",
+                success: function (calibration_result) {
+                    // var calibration_json = JSON.parse(calibration_result);
+                    $("#camera_x").val(calibration_result.payload.camera_x);
+                    $("#camera_y").val(calibration_result.payload.camera_y);
+                    $("#camera_z").val(calibration_result.payload.camera_z);
+                    $("#vehicle_width").val(calibration_result.payload.vehicle_width);
+                    $("#crossing_x").val(calibration_result.payload.crossing_x);
+                    $("#crossing_y").val(calibration_result.payload.crossing_y);
+                    $("#focus_length").val(calibration_result.payload.focus_length);
+                    $("#pixel_length").val(calibration_result.payload.pixel_length);
+                    $("#fps").val(calibration_result.payload.fps);
+                }
+            })
+        })
+
+        function book() {
+            $('#myModal').modal('show');
+            setTimeout(function () {
+                $("#myModal").modal("hide")
+            }, 1200);
+        }
+
+        $("#submit").click(function () {
+            // 设置标定参数
+            var calibration_Param = {
+                camera_x: parseInt($("#camera_x").val()), camera_y: parseInt($("#camera_y").val()), camera_z: parseInt($("#camera_z").val()),
+                vehicle_width: parseInt($("#vehicle_width").val()), crossing_x: parseInt($("#crossing_x").val()),
+                crossing_y: parseInt($("#crossing_y").val()), focus_length: parseFloat($("#focus_length").val()),
+                pixel_length: parseFloat($("#pixel_length").val()), fps: parseFloat($("#fps").val())
+            };
+            $.post({
+                url: location.protocol + "//" + location.host + "/api/adas/CalibrationParam",
+                contentType: "application/json",
+                dataType: "json",
+                data: JSON.stringify(calibration_Param),
+                success: function (result) {
+                    location.reload(true);
+
+                }
+            }).fail(function (fail_result) {
+                console.log(fail_result);
+                $('#errorInfo').text(fail_result.responseJSON.message);
+                book();
+            })
+        })
+
+
+
+    </script>
+</body>
+
+</html>

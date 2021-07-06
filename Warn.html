@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>warn param cfg</title>
+
+    <link rel="stylesheet" type="text/css" href="./bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="./font-awesome.css" />
+    <script src="./jquery-3.3.1.min.js"></script>
+    <script src="./bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="modal fade bd-example-modal-sm" id="myModal" role="dialog" data-backdrop="false" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <p class="text-center mb-0">
+                    <i class="fa mr-1" aria-hidden="true" id="errorInfo">提交失败</i>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <dev class="jumbotron">
+        <table>
+            <!-- <tr>
+                <td colspan="2"><img src="calmcar.jpg" style="width: 730px;height: 160px"></td>
+            </tr> -->
+            <tr>
+                <td>
+                    <b class="font_shadow">
+                        <font color="white" size="6" face="楷体">FcwTime</font>
+                    </b>
+                </td>
+                <td>
+
+                    <input name="nFcwTime" type="text" id="nFcwTime" title="前车碰撞报警阈值(ms)" placeholder="前车碰撞报警阈值(ms)">
+                </td>
+                <td>
+                    <b class="font_shadow">
+                        <font color="white" size="6" face="楷体">ThwTime</font>
+                    </b>
+                </td>
+                <td>
+
+                    <input name="nThwTime" type="text" id="nThwTime" title="车距过近报警阈值(ms)" placeholder="车距过近报警阈值(ms)">
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <b class="font_shadow">
+                        <font color="white" size="6" face="楷体">PcwTime</font>
+                    </b>
+                </td>
+                <td>
+                    <input name="nPcwTime" type="text" id="nPcwTime" title="行人碰撞报警阈值(ms)" placeholder="行人碰撞报警阈值(ms)">
+                </td>
+
+                <td>
+                    <b class="font_shadow">
+                        <font color="white" size="6" face="楷体">灵敏度</font>
+                    </b>
+                </td>
+                <td>
+                    <input name="nLdwThreshold" type="text" id="nLdwThreshold" title="车道偏离报警灵敏度"
+                        placeholder="车道偏离报警灵敏度">
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <b class="font_shadow">
+                        <font color="white" size="6" face="楷体">FcwTurnOn</font>
+                    </b>
+                </td>
+                <td>
+                    <input name="fFcwTurn_on" type="text" id="fFcwTurn_on" title="Fcw触发速度" placeholder="Fcw触发速度">
+                </td>
+
+                <td>
+                    <b class="font_shadow">
+                        <font color="white" size="6" face="楷体">LdwTurnOn</font>
+                    </b>
+                </td>
+                <td>
+                    <input name="fLdwTurn_on" type="text" id="fLdwTurn_on" title="Ldw触发速度" placeholder="Ldw触发速度">
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <b class="font_shadow">
+                        <font color="white" size="6" face="楷体">PcwTurnOn</font>
+                    </b>
+                </td>
+                <td>
+
+                    <input name="fPcwTurn_on" type="text" id="fPcwTurn_on" title="Pcw触发速度" placeholder="Pcw触发速度">
+                </td>
+
+                <td>
+                    <b class="font_shadow">
+                        <font color="white" size="6" face="楷体">ThwTurnOn</font>
+                    </b>
+                </td>
+                <td>
+                    <input name="fThwTurn_on" type="text" id="fThwTurn_on" title="Thw触发速度" placeholder="Thw触发速度">
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <b class="font_shadow">
+                        <font color="white" size="6" face="楷体">AlarmRange</font>
+                    </b>
+                </td>
+                <td>
+                    <input name="nAlarmRange" type="text" id="nAlarmRange" title="横向报警范围" placeholder="横向报警范围">
+                </td>
+
+                <td>
+                    <b class="font_shadow">
+                        <font color="white" size="6" face="楷体">FswRange</font>
+                    </b>
+                </td>
+                <td>
+                    <input name="nFswRangeMax" type="text" id="nFswRangeMax" title="Fsw报警范围" placeholder="Fsw报警范围">
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <b class="font_shadow">
+                        <font color="white" size="6" face="楷体">cover间隔</font>
+                    </b>
+                </td>
+                <td>
+                    <input name="coverInterval" type="text" id="coverInterval" title="遮挡报警间隔" placeholder="遮挡报警间隔">
+                </td>
+
+                <td>
+                    <b class="font_shadow">
+                        <font color="white" size="6" face="楷体">Thw间隔</font>
+                    </b>
+                </td>
+                <td>
+                    <input name="thwInterval" type="text" id="thwInterval" title="Thw报警间隔" placeholder="Thw报警间隔">
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <b class="font_shadow">
+                        <font color="white" size="6" face="楷体">ldw间隔</font>
+                    </b>
+                </td>
+                <td>
+                    <input name="ldwInterval" type="text" id="ldwInterval" title="ldw间隔" placeholder="ldw间隔">
+                </td>
+
+                <td>
+                    <b class="font_shadow">
+                        <font color="white" size="6" face="楷体">fcw间隔</font>
+                    </b>
+                </td>
+                <td>
+                    <input name="fcwInterval" type="text" id="fcwInterval" title="fcw间隔" placeholder="fcw间隔">
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <b class="font_shadow">
+                        <font color="white" size="6" face="楷体">pcw间隔</font>
+                    </b>
+                </td>
+                <td>
+                    <input name="pcwInterval" type="text" id="pcwInterval" title="pcw间隔" placeholder="pcw间隔">
+                </td>
+
+                <td>
+                    <b class="font_shadow">
+                        <font color="white" size="6" face="楷体">fsw间隔</font>
+                    </b>
+                </td>
+                <td>
+                    <input name="fswInterval" type="text" id="fswInterval" title="fsw间隔" placeholder="fsw间隔">
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <b class="font_shadow">
+                        <font color="white" size="6" face="楷体">cover使能</font>
+                    </b>
+                    <input name="coverEnable" type="checkbox" checked="false" id="coverEnable">
+                </td>
+                <td>
+                    <b class="font_shadow">
+                        <font color="white" size="6" face="楷体">Thw使能</font>
+                    </b>
+                    <input name="thwEnable" type="checkbox" checked="false" id="thwEnable">
+                </td>
+                <td>
+                    <b class="font_shadow">
+                        <font color="white" size="6" face="楷体">ldw使能</font>
+                    </b>
+                    <input name="ldwEnable" type="checkbox" checked="false" id="ldwEnable">
+                </td>
+
+                <td colspan="4">
+                    <b class="font_shadow">
+                        <font color="white" size="6" face="楷体">fcw使能</font>
+                    </b>
+                    <input name="fcwEnable" type="checkbox" checked="false" id="fcwEnable">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <b class="font_shadow">
+                        <font color="white" size="6" face="楷体">pcw使能</font>
+                    </b>
+                    <input name="pcwEnable" type="checkbox" checked="false" id="pcwEnable">
+                </td>
+                <td colspan="2">
+                    <b class="font_shadow">
+                        <font color="white" size="6" face="楷体">fsw使能</font>
+                    </b>
+                    <input name="fswEnable" type="checkbox" checked="false" id="fswEnable">
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td colspan="4">
+                    <button type="button" id="submit" class="btn btn-success btn-lg"
+                        style="text-shadow: black 5px 3px 3px;">提交</button>
+                </td>
+            </tr>
+        </table>
+    </dev>
+    <!-- </form> -->
+    <style type="text/css">
+        body {
+            background-color: #292528;
+        }
+
+        table {
+            margin: auto;
+            width: 950px;
+            height: 830px;
+            border-color: gray;
+            border-style: solid;
+            border-width: 0px;
+            /* background-image: url("bg2.jpg"); */
+            background-color: #292528;
+            background-size: 950px 830px;
+        }
+
+        td {
+            align-content: center;
+            text-align: center;
+        }
+
+        input[id="submit"] {
+            width: 80px;
+            height: 40px;
+            /* background-image: url("img/lightOpen.jpg"); */
+            /* background-size: 200px 140px; */
+        }
+
+        input[type="text"] {
+            width: 240px;
+            height: 60px;
+            border-radius: 6px;
+        }
+
+        input[type="checkbox"] {
+            width: 40px;
+            height: 40px;
+        }
+
+        .btn-lg {
+            padding: 12px 26px;
+            font-size: 28px;
+            line-height: 1.33;
+            border-radius: 15px;
+        }
+
+        .font_shadow {
+            text-shadow: black 5px 3px 3px;
+        }
+
+        .modal-content {
+            /* 宽度自适应内容 */
+            width: fit-content;
+            /* 流出间隙 */
+            padding: 0.2rem 0.4rem;
+        }
+    </style>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            // 获取报警参数
+            $.get({
+                url: location.protocol + "//"+location.host+"/api/adas/WarnConfigParam",
+                success: function (alarm_result) {
+
+                    console.log(alarm_result);
+                    // alert("hahahah");
+                    // var alarm_json = JSON.parse(alarm_result);
+                    $("#nFcwTime").val(alarm_result.payload.nFcwTime);
+                    $("#nThwTime").val(alarm_result.payload.nThwTime);
+                    $("#nPcwTime").val(alarm_result.payload.nPcwTime);
+                    $("#nLdwThreshold").val(alarm_result.payload.nLdwThreshold);
+                    $("#fFcwTurn_on").val(alarm_result.payload.fFcwTurn_on);
+                    $("#fLdwTurn_on").val(alarm_result.payload.fLdwTurn_on);
+                    $("#fPcwTurn_on").val(alarm_result.payload.fPcwTurn_on);
+                    $("#fThwTurn_on").val(alarm_result.payload.fThwTurn_on);
+                    $("#nAlarmRange").val(alarm_result.payload.nAlarmRange);
+                    $("#nFswRangeMax").val(alarm_result.payload.nFswRangeMax);
+                    $("#coverInterval").val(alarm_result.payload.nWarnFrameInterval[0]);
+                    $("#thwInterval").val(alarm_result.payload.nWarnFrameInterval[1]);
+                    $("#ldwInterval").val(alarm_result.payload.nWarnFrameInterval[2]);
+                    $("#fcwInterval").val(alarm_result.payload.nWarnFrameInterval[3]);
+                    $("#pcwInterval").val(alarm_result.payload.nWarnFrameInterval[4]);
+                    $("#fswInterval").val(alarm_result.payload.nWarnFrameInterval[5]);
+                    for (let index = 0; index < alarm_result.payload.nWarnItemEnable.length; index++) {
+                        if (alarm_result.payload.nWarnItemEnable[0] == true) {
+                            $("#coverEnable").attr("checked", true);
+                        } else {
+                            $("#coverEnable").attr("checked", false);
+                        }
+                        if (alarm_result.payload.nWarnItemEnable[1] == true) {
+                            $("#thwEnable").attr("checked", true);
+                        } else {
+                            $("#thwEnable").attr("checked", false);
+                        }
+                        if (alarm_result.payload.nWarnItemEnable[2] == true) {
+                            $("#ldwEnable").attr("checked", true);
+                        }
+                        else {
+                            $("#ldwEnable").attr("checked", false);
+                        }
+                        if (alarm_result.payload.nWarnItemEnable[3] == true) {
+                            $("#fcwEnable").attr("checked", true);
+                        } else {
+                            $("#fcwEnable").attr("checked", false);
+                        }
+                        if (alarm_result.payload.nWarnItemEnable[4] == true) {
+                            $("#pcwEnable").attr("checked", true);
+                        } else {
+                            $("#pcwEnable").attr("checked", false);
+                        }
+                        if (alarm_result.payload.nWarnItemEnable[5] == true) {
+                            $("#fswEnable").attr("checked", true);
+                        } else {
+                            $("#fswEnable").attr("checked", false);
+                        }
+                    };
+
+                }
+            })
+
+        })
+
+        function book() {
+            $('#myModal').modal('show');
+            setTimeout(function () {
+                $("#myModal").modal("hide")
+            }, 1200);
+        }
+
+        $("#submit").click(function () {
+            //获取checkbox的值
+            var enableFlag = $(":checkbox");
+            var alarmEnable = [];
+            for (let index = 0; index < enableFlag.length; index++) {
+                if (enableFlag[index].checked) {
+                    alarmEnable.push(true);
+                } else {
+                    alarmEnable.push(false);
+                }
+
+            }
+            //设置报警参数
+            var alarm_Param = {
+                nFcwTime: parseInt($("#nFcwTime").val()), nThwTime: parseInt($("#nThwTime").val()), nPcwTime: parseInt($("#nPcwTime").val()),
+                nLdwThreshold: parseInt($("#nLdwThreshold").val()), fFcwTurn_on: parseInt($("#fFcwTurn_on").val()), fLdwTurn_on: parseInt($("#fLdwTurn_on").val()),
+                fPcwTurn_on: parseInt($("#fPcwTurn_on").val()), fThwTurn_on: parseInt($("#fThwTurn_on").val()), nAlarmRange: parseInt($("#nAlarmRange").val()),
+                nFswRangeMax: parseInt($("#nFswRangeMax").val()),
+                nWarnFrameInterval: [parseInt($("#coverInterval").val()), parseInt($("#thwInterval").val()), parseInt($("#ldwInterval").val()), parseInt($("#fcwInterval").val()),
+                parseInt($("#pcwInterval").val()), parseInt($("#fswInterval").val())],
+                nWarnItemEnable: alarmEnable
+            };
+            $.post({
+                url: location.protocol + "//"+location.host+"/api/adas/WarnConfigParam",
+                contentType: "application/json",
+                dataType: "json",
+                data: JSON.stringify(alarm_Param),
+                success: function (result) {
+                    // alert("set alarm Param success"); //弹出一个框显示服务器返回的内容
+                    location.reload(true);
+
+                }
+            }).fail(function (fail_result) {
+                console.log(fail_result);
+                $('#errorInfo').text(fail_result.responseJSON.message);
+                book();
+            })
+        })
+
+    </script>
+</body>
+
+</html>
