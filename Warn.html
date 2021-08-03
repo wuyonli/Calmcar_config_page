@@ -236,6 +236,15 @@
                 </td>
             </tr>
 
+            <tr>
+                <td colspan="2">
+                    <b class="font_shadow">
+                        <font color="white" size="6" face="楷体">光流</font>
+                    </b>
+                    <input name="pcwEnable" type="checkbox" checked="false" id="opticalFlow">
+                </td>
+            </tr>
+
 
 
 
@@ -334,6 +343,7 @@
                     $("#fcwInterval").val(alarm_result.payload.nWarnFrameInterval[3]);
                     $("#pcwInterval").val(alarm_result.payload.nWarnFrameInterval[4]);
                     $("#fswInterval").val(alarm_result.payload.nWarnFrameInterval[5]);
+                    $("#opticalFlow").val(alarm_result.payload.opticalFlow);
                     for (let index = 0; index < alarm_result.payload.nWarnItemEnable.length; index++) {
                         if (alarm_result.payload.nWarnItemEnable[0] == true) {
                             $("#coverEnable").attr("checked", true);
@@ -398,6 +408,7 @@
                 nLdwThreshold: parseInt($("#nLdwThreshold").val()), fFcwTurn_on: parseInt($("#fFcwTurn_on").val()), fLdwTurn_on: parseInt($("#fLdwTurn_on").val()),
                 fPcwTurn_on: parseInt($("#fPcwTurn_on").val()), fThwTurn_on: parseInt($("#fThwTurn_on").val()), nAlarmRange: parseInt($("#nAlarmRange").val()),
                 nFswRangeMax: parseInt($("#nFswRangeMax").val()),
+                opticalFlow: parseFloat($("#opticalFlow").val()),
                 nWarnFrameInterval: [parseInt($("#coverInterval").val()), parseInt($("#thwInterval").val()), parseInt($("#ldwInterval").val()), parseInt($("#fcwInterval").val()),
                 parseInt($("#pcwInterval").val()), parseInt($("#fswInterval").val())],
                 nWarnItemEnable: alarmEnable
